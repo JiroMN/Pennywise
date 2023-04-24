@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "price": -13.50,
+    "title": "Netflix"
+  },
+  {
+    "id": "2",
+    "price": -123.43,
+    "title": "Verzekering"
+  },
+  {
+    "id": "3",
+    "price": -45,
+    "title": "Wegenbelasting"
+  },
+  {
+    "id": "4",
+    "price": 4554,
+    "title": "Salaris"
+  },
+  {
+    "id": "5",
+    "price": 25,
+    "title": "Zakgeld"
+  },
+  {
+    "id": "6",
+    "price": -150,
+    "title": "Benzine"
+  },
+  {
+    "id": "7",
+    "price": -1500,
+    "title": "Hyptheek"
+  },
+  {
+    "id": "8",
+    "price": -145,
+    "title": "Boodschappen"
+  },
+  {
+    "id": "9",
+    "price": -245.56,
+    "title": "Gas"
+  },
+  {
+    "id": "10",
+    "price": -487,
+    "title": "Eneco"
+  }
+]
