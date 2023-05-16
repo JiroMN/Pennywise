@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import properties from './../assets/style/mainProps';
 import List from '../components/List';
-import transactions from '../assets/data/transactions';
+import transactions from '../assets/data/transactions.json';
 
 
 export default function Income({navigation}) {

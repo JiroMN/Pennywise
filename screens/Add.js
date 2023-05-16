@@ -3,21 +3,40 @@ import React, {useState, useEffect} from 'react'
 import properties from '../assets/style/mainProps'
 import EvilIcons from '@expo/vector-icons/EvilIcons'
 import Colors from '../assets/style/colors'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function Add({navigation}) {
     [value, setValue] = useState('');
     [title, setTitle] = useState('');
-    [isLoading, setLoading] = useState(true);
-    [data, setData] = useState([]);
 
-    useEffect(() => {
-        const url = "https://lidex.techlythical.com/transactions.json";
-        fetch(url)
-          .then((resp) => resp.json())
-          .then((json) => setData(json))
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
-      }, []);
+    const addOrUpdateData = async (key, newData) => {
+        try {
+          // Retrieve the existing JSON data from AsyncStorage
+          const jsonData = await AsyncStorage.getItem(key);
+      
+          let existingData = {};
+          if (jsonData) {
+            existingData = JSON.parse(jsonData);
+          }
+      
+          // Update the existing data with the new data
+          existingData = { ...existingData, ...newData };
+      
+          // Store the updated JSON data back into AsyncStorage
+          await AsyncStorage.setItem(key, JSON.stringify(existingData));
+      
+          alert('JSON data added or updated successfully!');
+        } catch (error) {
+          alert(`${error}Error adding or updating JSON data:`, error);
+        }
+    };
+      
+
+    const AsyncTest = () => {
+        addOrUpdateData("transactions", {id: "11", price: 520, title: "TestTest123"})
+    }
+    
+
 
   return (
     <View style={[properties.primaryBackground, styles.container]}> 
@@ -37,23 +56,10 @@ export default function Add({navigation}) {
         placeholderTextColor={Colors["textColor"]}
         keyboardType="numeric"
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={AsyncTest} >
             <Text style={styles.buttonText}>Add</Text>
             <EvilIcons name="plus" size={28} color={Colors["darkTextColor"]} />
         </TouchableOpacity>
-
-        {isLoading ? (
-            <Text>Loading...</Text>
-        ) : (
-            data.map((post) => {
-            return (
-                <View>
-                    <Text style={styles.title}>{post.title}</Text>
-                    <Text>{post.body}</Text>
-                </View>
-            );
-            })
-        )}
     </View>
   )
 }
